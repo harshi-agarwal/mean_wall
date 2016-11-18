@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <div ng-controller="sessionController">
+      <h1>{{session_user.name}}</h1>
+    <h1>you are in dashboard</h1>
+
+      <a href="/logout">logout</a>
+      <h2>Post a message</h2>
+      <form >
+        <textarea ng-model=newmessage.content rows="8" cols="40"></textarea>
+        <input type="submit" value="Post a message"ng-click="addmessage()">
+      </form>
+      <ul>
+        <li ng-repeat='message in messages| orderBy: "-createdAt"'>
+          {{message._user.name}}
+          {{message.content}}
+          {{message.createdAt|date : 'MMM dd y'}}
+
+          <ul>
+            <li ng-repeat='comment in message.comments|orderBy: "-createdAt"'>
+              {{comment.text}}
+              {{comment._user.name}}
+              {{comment.createdAt|date : 'MMM dd y'}}
+
+            </li>
+          </ul>
+        <h2>post a comment</h2>
+        <form >
+          <textarea ng-model="newcomment.text" rows="8" cols="40"></textarea>
+          <input type="submit" value="post a commment" ng-click="addcomment(message._id,newcomment)">
+        </form>
+      </li>
+    </ul>
+
+    </div>
+  </body>
+</html>
